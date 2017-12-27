@@ -97,14 +97,14 @@ class KNearestNeighbor(object):
     	# distance from one test to ALL the training images
     	# braodcasting - work with different shaped arrays (ROWS) to do this calculation
     		# smaller 'braodcasted' to the size of the larger one
-    		#
+    		# one kind of alignment is necessary **
     	dists[i, :] = np.sqrt(np.sum(np.power(self.X_train - X[i], 2), axis=1))
       #######################################################################
       # TODO:                                                               #
       # Compute the l2 distance between the ith test point and all training #
       # points, and store the result in dists[i, :].                        #
       #######################################################################
-      pass
+     
       #######################################################################
       #                         END OF YOUR CODE                            #
       #######################################################################
@@ -132,7 +132,8 @@ class KNearestNeighbor(object):
     # HINT: Try to formulate the l2 distance using matrix multiplication    #
     #       and two broadcast sums.                                         #
     #########################################################################
-    pass
+    test_sum = np.sum(np.square(X), axis=1) 
+    train_sum = np.sum(np.square(X_train), axis=1)
     #########################################################################
     #                         END OF YOUR CODE                              #
     #########################################################################
@@ -178,6 +179,7 @@ class KNearestNeighbor(object):
       # label.                                                                #
       #########################################################################
       y_pred[i] = scipy.stats.mode(closest_y)[0][0]
+      	# mode broke ties for us
       #########################################################################
       #                           END OF YOUR CODE                            # 
       #########################################################################
